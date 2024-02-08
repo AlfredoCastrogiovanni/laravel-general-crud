@@ -29,7 +29,7 @@ class PokemonSeeder extends Seeder
                     "special_defense" => $data['8'],
                     "speed" => $data['9'],
                     "generation" => $data['10'],
-                    "legendary" => $data['11'] == true ? 1 : 0,
+                    "legendary" => $data['11'] == 'TRUE' ? 1 : 0,
                     "evolves_from_id" => $data['12'],
                 ]);
             }

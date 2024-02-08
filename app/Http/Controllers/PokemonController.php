@@ -35,9 +35,9 @@ class PokemonController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pokemon $pokemon)
     {
-        //
+        return view('pages.pokemons.show', compact('pokemon'));
     }
 
     /**

@@ -21,7 +21,7 @@ class PokemonController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.pokemons.create');
     }
 
     /**
@@ -29,7 +29,11 @@ class PokemonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['legendary'] = isset($data['legendary']);
+
+        $newPokemon = Pokemon::create($data);
+        return redirect()->route('pokemons.show', $newPokemon->id);
     }
 
     /**
@@ -43,24 +47,29 @@ class PokemonController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Pokemon $pokemon)
     {
-        //
+        return view('pages.pokemons.edit', compact('pokemon'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Pokemon $pokemon)
     {
-        //
+        $data = $request->all();
+        $data['legendary'] = isset($data['legendary']);
+
+        $pokemon->update($data);
+        return redirect()->route('pokemons.show', $pokemon->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pokemon $pokemon)
     {
-        //
+        $pokemon->delete();
+        return redirect()->route('pokemons.index');
     }
 }

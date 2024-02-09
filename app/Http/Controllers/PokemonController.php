@@ -59,5 +59,8 @@ class PokemonController extends Controller
      */
     public function destroy(Pokemon $pokemon)
     {
+        $pokemon->delete();
+
+        return redirect()->route('pokemons.index');
     }
 }

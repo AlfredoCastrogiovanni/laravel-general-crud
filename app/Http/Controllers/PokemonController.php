@@ -21,7 +21,7 @@ class PokemonController extends Controller
      */
     public function create()
     {
-        
+        return view('pages.pokemons.create');
     }
 
     /**

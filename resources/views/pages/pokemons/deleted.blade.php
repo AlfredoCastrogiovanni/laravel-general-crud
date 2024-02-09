@@ -18,7 +18,7 @@
 
     <div class="container mt-5">
         <div class="row">
-            @foreach ($pokemons as $pokemon)
+            @forelse ($pokemons as $pokemon)
                 <div class="col-4">
                     <div class="card mb-4">
                         <img src="{{ getImage($pokemon->id) }}" class="card-img-top" alt="...">
@@ -63,6 +63,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- Modal 2 --}}
                         <div class="modal fade" id="{{ 'modal-remove' . $pokemon->id }}" tabindex="-1"
                             aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -87,7 +88,13 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="row justify-content-center align-items-center">
+                    <h1 class="col-12 text-center">
+                        No Pokemon Deleted
+                    </h1>
+                </div>
+            @endforelse
         </div>
     </div>
 @endsection

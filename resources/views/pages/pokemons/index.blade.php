@@ -16,7 +16,8 @@
     @endphp
     <div class="row mt-3">
         <div class="col-6 offset-6 text-end">
-            <a class="btn btn-success me-3" href="{{ route('pokemons.create') }}">Create Pokemon</a>
+            <a class="btn btn-success" href="{{ route('pokemons.create') }}">Create Pokemon</a>
+            <a class="btn btn-secondary me-3" href="{{ route('pokemons.deleted') }}">Bin</a>
         </div>
     </div>
     <div class="container mt-5">

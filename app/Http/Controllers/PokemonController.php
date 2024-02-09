@@ -76,9 +76,9 @@ class PokemonController extends Controller
 
     public function permanentDestroy(Pokemon $pokemon)
     {
-        $pokemon->forceDelete();
-        $pokemons = Pokemon::onlyTrashed()->orderBy('id', 'DESC')->get();
-        return view('pages.pokemons.deleted', compact('pokemons'));
+        $pokemon->onlyTrashed()->forceDelete();
+        return redirect()->route('pokemons.deleted');
+
     }
 
 

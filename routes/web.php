@@ -21,5 +21,5 @@ Route::get('/', function () {
 
 Route::get('/pokemons/deleted', [PokemonController::class, 'deletedPokemons'])->name('pokemons.deleted');
 Route::post('/pokemons/deleted', [PokemonController::class, 'restorePokemon'])->name('pokemons.restore');
-Route::delete('/pokemons/remove', [PokemonController::class, 'restorePokemon'])->name('pokemons.remove');
+Route::delete('/pokemons/remove', [PokemonController::class, 'permanentDestroy'])->name('pokemons.remove');
 route::resource('pokemons', PokemonController::class);

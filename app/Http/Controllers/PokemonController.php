@@ -48,6 +48,7 @@ class PokemonController extends Controller
      */
     public function edit(Pokemon $pokemon)
     {
+        return view('pages.pokemons.edit', compact('pokemon'));
     }
 
     /**

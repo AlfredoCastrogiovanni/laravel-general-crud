@@ -64,16 +64,24 @@ class PokemonController extends Controller
         return redirect()->route('pokemons.index');
     }
 
+    public function permanentDestroy(Pokemon $pokemon)
+    {
+        $pokemon->forceDelete();
+        $pokemons = Pokemon::onlyTrashed()->orderBy('id', 'DESC')->get();
+        return view('pages.pokemons.deleted', compact('pokemons'));
+    }
+
+
     public function deletedPokemons()
     {
         $pokemons = Pokemon::onlyTrashed()->orderBy('id', 'DESC')->get();
-        return view('pokemons.deleted', compact('pokemons'));
+        return view('pages.pokemons.deleted', compact('pokemons'));
     }
 
     public function restorePokemon(Pokemon $pokemon)
     {
-        Pokemon::withTrashed()->find($pokemon->id)->restore();
+        $pokemon::withTrashed()->restore();
         $pokemons = Pokemon::onlyTrashed()->orderBy('id', 'DESC')->get();
-        return view('pokemons.deleted', compact('pokemons'));
+        return view('pages.pokemons.deleted', compact('pokemons'));
     }
 }

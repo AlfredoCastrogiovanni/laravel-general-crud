@@ -15,11 +15,7 @@
             }
         }
     @endphp
-    <div class="row mt-3">
-        <div class="col-6 offset-6 text-end">
-            <a class="btn btn-success me-3" href="{{ route('pokemons.create') }}">Create Pokemon</a>
-        </div>
-    </div>
+
     <div class="container mt-5">
         <div class="row">
             @foreach ($pokemons as $pokemon)
@@ -38,12 +34,14 @@
                                 {{ $pokemon->legendary ? 'yes' : 'NO' }}</li>
                         </ul>
                         <div class="card-body">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="{{ '#modal-restore' . $pokemon->id }}">Restore</button>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="{{ '#modal' . $pokemon->id }}">Restore</button>
+                                data-bs-target="{{ '#modal-remove' . $pokemon->id }}">Remove</button>
                         </div>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="{{ 'modal' . $pokemon->id }}" tabindex="-1"
+                        <div class="modal fade" id="{{ 'modal-restore' . $pokemon->id }}" tabindex="-1"
                             aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -54,10 +52,32 @@
                                         Are you sure you want to restore {{ $pokemon->name }}?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="{{ route('pokemons.destroy', $pokemon) }}" method="POST">
+                                        <form action="{{ route('pokemons.restore', $pokemon) }}" method="POST">
                                             @csrf
-                                            @method('PUT')
                                             <button type="submit" class="btn btn-danger">Restore</button>
+                                        </form>
+
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="{{ 'modal-remove' . $pokemon->id }}" tabindex="-1"
+                            aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="modalLabel">Restore</h1>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to restore {{ $pokemon->name }}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{ route('pokemons.remove', $pokemon) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Remove</button>
                                         </form>
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>

@@ -29,6 +29,11 @@ class PokemonController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        $data['legendary'] = isset($data['legendary']);
+
+        $newPokemon = Pokemon::create($data);
+        return redirect()->route('pokemons.show', $newPokemon->id);
     }
 
     /**

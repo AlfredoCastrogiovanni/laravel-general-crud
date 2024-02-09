@@ -56,6 +56,11 @@ class PokemonController extends Controller
      */
     public function update(Request $request, Pokemon $pokemon)
     {
+        $data = $request->all();
+        $data['legendary'] = isset($data['legendary']);
+
+        $pokemon->update($data);
+        return redirect()->route('pokemons.show', $pokemon);
     }
 
     /**

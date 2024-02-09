@@ -12,7 +12,6 @@ class PokemonController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -20,7 +19,6 @@ class PokemonController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -28,7 +26,6 @@ class PokemonController extends Controller
      */
     public function store(Request $request)
     {
-        
     }
 
     /**
@@ -36,7 +33,6 @@ class PokemonController extends Controller
      */
     public function show(Pokemon $pokemon)
     {
-        
     }
 
     /**
@@ -44,7 +40,6 @@ class PokemonController extends Controller
      */
     public function edit(Pokemon $pokemon)
     {
-        
     }
 
     /**
@@ -52,7 +47,11 @@ class PokemonController extends Controller
      */
     public function update(Request $request, Pokemon $pokemon)
     {
-        
+        $data = $request->all();
+        $data['legendary'] = isset($data['legendary']);
+
+        $pokemon->update($data);
+        return redirect()->route('pokemons.show', $pokemon);
     }
 
     /**
@@ -60,6 +59,5 @@ class PokemonController extends Controller
      */
     public function destroy(Pokemon $pokemon)
     {
-        
     }
 }

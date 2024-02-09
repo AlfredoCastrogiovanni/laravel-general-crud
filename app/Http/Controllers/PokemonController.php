@@ -12,7 +12,6 @@ class PokemonController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -20,7 +19,6 @@ class PokemonController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -28,7 +26,6 @@ class PokemonController extends Controller
      */
     public function store(Request $request)
     {
-        
     }
 
     /**
@@ -36,7 +33,6 @@ class PokemonController extends Controller
      */
     public function show(Pokemon $pokemon)
     {
-        
     }
 
     /**
@@ -44,7 +40,7 @@ class PokemonController extends Controller
      */
     public function edit(Pokemon $pokemon)
     {
-        
+        return view('pages.pokemons.edit', compact('pokemon'));
     }
 
     /**
@@ -52,7 +48,6 @@ class PokemonController extends Controller
      */
     public function update(Request $request, Pokemon $pokemon)
     {
-        
     }
 
     /**
@@ -60,6 +55,5 @@ class PokemonController extends Controller
      */
     public function destroy(Pokemon $pokemon)
     {
-        
     }
 }

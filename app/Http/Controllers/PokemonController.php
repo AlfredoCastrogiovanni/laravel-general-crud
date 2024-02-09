@@ -12,6 +12,8 @@ class PokemonController extends Controller
      */
     public function index()
     {
+        $pokemons = Pokemon::all();
+        return view('pages.pokemons.index', compact('pokemons'));
     }
 
     /**
@@ -19,6 +21,7 @@ class PokemonController extends Controller
      */
     public function create()
     {
+        return view('pages.pokemons.create');
     }
 
     /**
@@ -26,6 +29,11 @@ class PokemonController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        $data['legendary'] = isset($data['legendary']);
+
+        $newPokemon = Pokemon::create($data);
+        return redirect()->route('pokemons.show', $newPokemon->id);
     }
 
     /**

@@ -49,6 +49,7 @@ class PokemonController extends Controller
      */
     public function edit(Pokemon $pokemon)
     {
+        return view('pages.pokemons.edit', compact('pokemon'));
     }
 
     /**
@@ -56,6 +57,11 @@ class PokemonController extends Controller
      */
     public function update(Request $request, Pokemon $pokemon)
     {
+        $data = $request->all();
+        $data['legendary'] = isset($data['legendary']);
+
+        $pokemon->update($data);
+        return redirect()->route('pokemons.show', $pokemon);
     }
 
     /**
@@ -63,5 +69,29 @@ class PokemonController extends Controller
      */
     public function destroy(Pokemon $pokemon)
     {
+        $pokemon->delete();
+
+        return redirect()->route('pokemons.index');
+    }
+
+    public function permanentDestroy(Pokemon $pokemon)
+    {
+        $pokemon->forceDelete();
+        $pokemons = Pokemon::onlyTrashed()->orderBy('id', 'DESC')->get();
+        return view('pages.pokemons.deleted', compact('pokemons'));
+    }
+
+
+    public function deletedPokemons()
+    {
+        $pokemons = Pokemon::onlyTrashed()->orderBy('id', 'DESC')->get();
+        return view('pages.pokemons.deleted', compact('pokemons'));
+    }
+
+    public function restorePokemon(Pokemon $pokemon)
+    {
+        $pokemon::withTrashed()->restore();
+        $pokemons = Pokemon::onlyTrashed()->orderBy('id', 'DESC')->get();
+        return view('pages.pokemons.deleted', compact('pokemons'));
     }
 }
